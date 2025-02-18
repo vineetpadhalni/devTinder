@@ -1,8 +1,17 @@
 const mongoose=require("mongoose");
+require("dotenv").config();
 const connectDB=async()=>{
-    await mongoose.connect(
-        "mongodb+srv://vineetpadhalni09:qMQRJkmi8EG0nlP4@cluster0.4yfio6p.mongodb.net/devTinder"
-    )
+
+try {
+    await mongoose.connect(process.env.MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log("Connected to MongoDB");
+  } catch (err) {
+    console.error("Error connecting to MongoDB:", err.message);
+  }
 }
+
 module.exports=connectDB;
 
